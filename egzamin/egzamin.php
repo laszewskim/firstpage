@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="general.css">
+    <title>Egzamin</title>
+</head>
+<body>
+    <header>
+        <h1>Egzamin z PHP oraz JS</h1>
+    </header>
+    <main>
+        <section id="lewy">
+            <form method="post">
+                <p>Czy masz 21 lat?</p>
+                <input type="checkbox" name="tak"> 
+                    <label for="tak">tak</label>
+                <input type="checkbox" name="nie"> 
+                    <label for="nie">nie</label><br>
+                <input type="text" placeholder="imie i nazwisko" name="in"><br>
+                <input type="submit" value="Prześlij dane" name="sub" id="sub">
+                <div id='wynik'>
+            </form>
+            <?php
+            if(isset($_POST['sub'])){
+                if(isset($_POST['tak']) || isset($_POST['nie']) && isset($_POST['in'])){ 
+                    if(isset($_POST['tak'])){
+                        $val = true; 
+                    }
+                    else if(isset($_POST['nie'])){
+                        $val = true; 
+                    } 
+                    $imie_naz = $_POST['in'];
+                    $in = explode(" ",$imie_naz); 
+                    $imie = $in[0]; 
+                    $nazwisko = $in[1]; 
+                    $conn = mysqli_connect("localhost","root","","egzamin"); 
+                    $sql = "INSERT INTO `logs`(`id`,`wiek21`, `nazwisko`, `imie`) VALUES ('','$val', '$nazwisko', '$imie')";
+                    $result = mysqli_query($conn,$sql); 
+                    if($result){ 
+                        echo "dodano do bazy";
+                    }
+                    else{
+                        echo "blad sql"; 
+                    } 
+
+                }
+                else echo"wprowadz wszystkie dane"; 
+            }
+            ?> 
+            </div>
+        </section> 
+        <section id="prawy">
+        <form method="post">
+                <p>Jaki kolor wybierasz?</p>
+                <input type="radio" name="kolor" id="zielony"> 
+                    <label for="zielony">zielony</label>
+                <input type="radio" name="kolor" id="czerwony"> 
+                    <label for="czerwony">czerwony</label><br>
+                <p>Ile wynosi alpha?</p>
+                <select id="lista">
+                    <option value="0.3">0.3</option>
+                    <option value="0.7">0.7</option>
+                </select><br>
+               <a onclick="f()">--Prześlij dane--</a>
+            </form> 
+            <script>
+                function f(){
+                    let zielony = document.getElementById('zielony');
+                    let czerwony = document.getElementById('czerwony'); 
+                    let alpha = document.getElementById('lista').value; 
+                    if(zielony.checked){
+                        document.getElementsByTagName('main')[0].style.backgroundColor = `rgba(0,255,0,${alpha})`; 
+                    }
+                    else if(czerwony.checked){
+                        document.getElementsByTagName('main')[0].style.backgroundColor = `rgba(255,0,0,${alpha})`; 
+                    }
+                }
+
+            </script> 
+        </section>
+    </main>  
+    <footer>
+        <div id="stopka">
+            <h2>michu</h2>
+        </div>
+    </footer> 
+</body>
+</html>

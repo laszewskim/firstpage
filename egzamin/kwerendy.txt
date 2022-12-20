@@ -1,0 +1,4 @@
+1. SELECT id, wiek21, imie FROM logs WHERE wiek21=true 
+2. SELECT imie FROM logs 
+3. SELECT * FROM logs WHERE id BETWEEN 1 AND 7 AND BETWEEN 12 AND 17
+4. UPDATE logs SET wiek21=false WHERE id BETWEEN 11 AND 20 AND id>=30 
