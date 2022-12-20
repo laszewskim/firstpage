@@ -23,34 +23,6 @@
                 <input type="submit" value="Prześlij dane" name="sub" id="sub">
                 <div id='wynik'>
             </form>
-            <?php
-            if(isset($_POST['sub'])){
-                if(isset($_POST['tak']) || isset($_POST['nie']) && isset($_POST['in'])){ 
-                    if(isset($_POST['tak'])){
-                        $val = true; 
-                    }
-                    else if(isset($_POST['nie'])){
-                        $val = true; 
-                    } 
-                    $imie_naz = $_POST['in'];
-                    $in = explode(" ",$imie_naz); 
-                    $imie = $in[0]; 
-                    $nazwisko = $in[1]; 
-                    $conn = mysqli_connect("localhost","root","","egzamin"); 
-                    $sql = "INSERT INTO `logs`(`id`,`wiek21`, `nazwisko`, `imie`) VALUES ('','$val', '$nazwisko', '$imie')";
-                    $result = mysqli_query($conn,$sql); 
-                    if($result){ 
-                        echo "dodano do bazy";
-                    }
-                    else{
-                        echo "blad sql"; 
-                    } 
-
-                }
-                else echo"wprowadz wszystkie dane"; 
-            }
-            ?> 
-            </div>
         </section> 
         <section id="prawy">
         <form method="post">
